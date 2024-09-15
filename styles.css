@@ -54,13 +54,13 @@ pre {
     border: 1px solid #ccc; 
     padding: 10px; 
     background-color: #f9f9f9; 
-    white-space: pre-line; /* Allow line breaks in bookmarks */
+    white-space: pre-line; 
 }
 
 #bookmarkList div {
-    margin-bottom: 10px; /* Space between bookmarks */
-    padding: 5px; /* Optional: Padding for each bookmark */
-    border-bottom: 1px solid #ddd; /* Optional: Add a bottom border */
+    margin-bottom: 10px;
+    padding: 5px; 
+    border-bottom: 1px solid #ddd; 
 }
 
 #showBookmarks {
@@ -73,7 +73,7 @@ pre {
 }
 
 #backButton {
-    margin-top: 20px; /* Adjust the value as needed for spacing */
+    margin-top: 20px; 
     padding: 10px;
     background-color: #007bff;
     color: white;
@@ -84,5 +84,20 @@ pre {
 }
 
 #backButton:hover {
-    background-color: #0056b3; /* Change color on hover */
+    background-color: #0056b3; 
+}
+
+.deleteButton {
+    margin-top: 5px; 
+    padding: 5px;
+    background-color: #dc3545; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.deleteButton:hover {
+    background-color: #c82333; 
 }
