@@ -18,13 +18,27 @@ class BookmarkManager {
         this.saveBookmarks(); 
         console.log('Bookmark added:', newBookmark); 
     }
-    displayBookmarks() {
-        if (this.bookmarks.length === 0) {
+    deleteBookmark(index) {
+        this.bookmarks.splice(index, 1); 
+        this.saveBookmarks(); 
+        console.log('Bookmark deleted at index:', index);
+    }
+    getSortedBookmarks(option) {
+        if (option === 'ongoing') {
+            return this.bookmarks.filter(b => b.status === 'ongoing');
+        } else if (option === 'on hold') {
+            return this.bookmarks.filter(b => b.status === 'on hold');
+        }
+        return this.bookmarks; 
+    }
+    displayBookmarks(option = 'all') {
+        const bookmarksToDisplay = this.getSortedBookmarks(option);
+        if (bookmarksToDisplay.length === 0) {
             return 'No bookmarks available.'; 
         }
-        return this.bookmarks.map((bookmark, index) => 
-            `${index + 1}:\n  Repo Name: ${bookmark.repoName || 'N/A'}\n  Repo Link: ${bookmark.repoLink || 'N/A'}\n  Last Action: ${bookmark.lastAction || 'N/A'}\n  Status: ${bookmark.status || 'N/A'}`
-        ).join('\n\n');
+        return bookmarksToDisplay.map((bookmark, index) => 
+            `${index + 1}:\n  Repo Name: ${bookmark.repoName || 'N/A'}\n  Repo Link: <a href="${bookmark.repoLink || '#'}" target="_blank">${bookmark.repoLink || 'N/A'}</a>\n  Last Action: ${bookmark.lastAction || 'N/A'}\n  Status: ${bookmark.status || 'N/A'}\n  <button class="deleteButton" data-index="${index}">Delete</button>`
+        ).join('<br><br>'); 
     }
     saveBookmarks() {
         chrome.storage.local.set({ bookmarks: this.bookmarks }, () => {
