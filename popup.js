@@ -1,14 +1,19 @@
 const manager = new BookmarkManager();
 
-document.getElementById('bookmarkForm').addEventListener('submit', function(event) {
+document.addEventListener('DOMContentLoaded', function() {
+    displayBookmarks();
+});
+
+document.getElementById('bookmarkForm').addEventListener('submit', async function(event) {
     event.preventDefault();
-    const repoName = document.getElementById('repoName').value; 
     const repoLink = document.getElementById('repoLink').value;
     const lastAction = document.getElementById('lastAction').value;
     const status = document.getElementById('status').value;
 
-    manager.addBookmark(repoName, repoLink, lastAction, status); 
-    this.reset(); 
+    await manager.addBookmark(repoLink, lastAction, status);
+    this.reset();
+    displayBookmarks();
+    alert('Bookmark added successfully!');
 });
 
 document.getElementById('showBookmarks').addEventListener('click', function() {
